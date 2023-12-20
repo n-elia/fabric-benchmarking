@@ -1,0 +1,36 @@
+benchmark:
+  description: Caliper benchmark targeting HyperWatchdog.
+  name: hyperwatchdog_benchmark
+  test:
+    rounds:
+    - description: Caliper benchmark targeting HyperWatchdog.
+      label: Chunk Length of 1500
+      rateControl:
+        opts:
+          startingTps: 90
+          transactionLoad: 50
+        type: fixed-load
+      txDuration: 20
+      workload:
+        arguments:
+          chaincodeID: basic
+          chunkLen: 200
+          policyId: signal_energy_policy_v1
+        module: benchmarks/workloads/policy-gateway.js
+    workers:
+      number: 1
+launcher:
+  fabric:
+    n_orderers: 3
+    n_orgs: 2
+    n_peer_per_org: 2
+    starting_port: 7160
+  network:
+    delay: 74
+    jitter: 39
+    loss: 3
+    throughput: 2920
+  smart_contract:
+    name: basic
+    path: /home/nelia/benchmark/fabric-custom-network/app/smartcontract/hyper-watchdog/chaincode-go
+    version: "1.0"

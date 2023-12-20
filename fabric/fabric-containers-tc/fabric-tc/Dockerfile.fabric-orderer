@@ -1,0 +1,7 @@
+ARG BASE_CONTAINER_IMAGE
+ARG BASE_CONTAINER_TAG
+
+FROM "${BASE_CONTAINER_IMAGE}"
+
+RUN apk add --no-cache iproute2 iputils
+# RUN apt-get install iproute2 -y

@@ -1,0 +1,27 @@
+version: '2'
+
+services:
+    caliper:
+        container_name: caliper
+        image: hyperledger/caliper:0.5.0
+
+        command: npm install csv && launch manager # may also be launch worker
+
+        environment:
+        - CALIPER_BIND_SUT=fabric:2.4
+
+        # - CALIPER_WORKSPACE=/hyperledger/caliper/workspace # implicit
+        # The following are relative to the workspace directory
+        - CALIPER_BENCHCONFIG=benchmarks/default.yaml
+        - CALIPER_NETWORKCONFIG=networks/fabric/network.yaml
+        
+        volumes:
+        - ./workspace:/hyperledger/caliper/workspace
+
+        networks:
+            # Same network as the fabric containers
+            - fabric_network
+
+networks:
+    fabric_network:
+        external: true

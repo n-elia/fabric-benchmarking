@@ -1,0 +1,20 @@
+description: Caliper benchmark targeting HyperWatchdog.
+name: hyperwatchdog_benchmark
+test:
+  rounds:
+  - description: Caliper benchmark targeting HyperWatchdog.
+    label: Chunk Length of 1500
+    rateControl:
+      opts:
+        startingTps: 90
+        transactionLoad: 50
+      type: fixed-load
+    txDuration: 20
+    workload:
+      arguments:
+        chaincodeID: basic
+        chunkLen: 200
+        policyId: signal_energy_policy_v1
+      module: benchmarks/workloads/policy-gateway.js
+  workers:
+    number: 1

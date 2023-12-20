@@ -1,0 +1,20 @@
+description: Caliper benchmark targeting HyperWatchdog.
+name: bench_policy_gateway
+test:
+  rounds:
+  - description: Caliper benchmark targeting HyperWatchdog.
+    label: Policy Gateway 100
+    rateControl:
+      opts:
+        startingTps: 150
+        transactionLoad: 300
+      type: fixed-load
+    txDuration: 180
+    workload:
+      arguments:
+        chaincodeID: basic
+        chunkLen: 100
+        policyId: signal_energy_policy_v1
+      module: benchmarks/workloads/policy-gateway.js
+  workers:
+    number: 1

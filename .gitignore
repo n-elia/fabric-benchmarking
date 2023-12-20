@@ -1,0 +1,15 @@
+app/tmp/**
+caliper/workspace/networks/fabric/user/**
+caliper/workspace/networks/fabric/network.yaml
+
+# Python stuff
+*.pyc
+*.pyo
+*.pyd
+__pycache__
+
+.venv
+venv/
+
+# VSCode
+.vscode

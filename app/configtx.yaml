@@ -1,0 +1,178 @@
+Profiles:
+  default:
+    Application:
+      Capabilities:
+        V2_0: true
+      Organizations:
+      - AnchorPeers:
+        - Host: peer1.org1.org
+          Port: 7162
+        - Host: peer2.org1.org
+          Port: 7163
+        ID: Org1OrgMSP
+        MSPDir: /home/nelia/benchmark/fabric-custom-network/app/tmp/organizations/peerOrganizations/org1.org/ca/msp
+        Name: org1.org
+        Policies:
+          Admins:
+            Rule: OR('Org1OrgMSP.admin')
+            Type: Signature
+          Readers:
+            Rule: OR('Org1OrgMSP.member')
+            Type: Signature
+          Writers:
+            Rule: OR('Org1OrgMSP.member')
+            Type: Signature
+        SkipAsForeign: false
+      - AnchorPeers:
+        - Host: peer1.org2.org
+          Port: 7165
+        - Host: peer2.org2.org
+          Port: 7166
+        ID: Org2OrgMSP
+        MSPDir: /home/nelia/benchmark/fabric-custom-network/app/tmp/organizations/peerOrganizations/org2.org/ca/msp
+        Name: org2.org
+        Policies:
+          Admins:
+            Rule: OR('Org2OrgMSP.admin')
+            Type: Signature
+          Readers:
+            Rule: OR('Org2OrgMSP.member')
+            Type: Signature
+          Writers:
+            Rule: OR('Org2OrgMSP.member')
+            Type: Signature
+        SkipAsForeign: false
+      - AnchorPeers:
+        - Host: peer1.org3.org
+          Port: 7168
+        - Host: peer2.org3.org
+          Port: 7169
+        ID: Org3OrgMSP
+        MSPDir: /home/nelia/benchmark/fabric-custom-network/app/tmp/organizations/peerOrganizations/org3.org/ca/msp
+        Name: org3.org
+        Policies:
+          Admins:
+            Rule: OR('Org3OrgMSP.admin')
+            Type: Signature
+          Readers:
+            Rule: OR('Org3OrgMSP.member')
+            Type: Signature
+          Writers:
+            Rule: OR('Org3OrgMSP.member')
+            Type: Signature
+        SkipAsForeign: false
+      - AnchorPeers:
+        - Host: peer1.org4.org
+          Port: 7171
+        - Host: peer2.org4.org
+          Port: 7172
+        ID: Org4OrgMSP
+        MSPDir: /home/nelia/benchmark/fabric-custom-network/app/tmp/organizations/peerOrganizations/org4.org/ca/msp
+        Name: org4.org
+        Policies:
+          Admins:
+            Rule: OR('Org4OrgMSP.admin')
+            Type: Signature
+          Readers:
+            Rule: OR('Org4OrgMSP.member')
+            Type: Signature
+          Writers:
+            Rule: OR('Org4OrgMSP.member')
+            Type: Signature
+        SkipAsForeign: false
+      Policies:
+        Admins:
+          Rule: MAJORITY Admins
+          Type: ImplicitMeta
+        Endorsement:
+          Rule: AND('Org1OrgMSP.member', 'Org2OrgMSP.member', 'Org3OrgMSP.member',
+            'Org4OrgMSP.member')
+          Type: Signature
+        LifecycleEndorsement:
+          Rule: AND('Org1OrgMSP.member', 'Org2OrgMSP.member', 'Org3OrgMSP.member',
+            'Org4OrgMSP.member')
+          Type: Signature
+        Readers:
+          Rule: ANY Readers
+          Type: ImplicitMeta
+        Writers:
+          Rule: ANY Writers
+          Type: ImplicitMeta
+    Capabilities:
+      V2_0: true
+    Orderer:
+      Addresses:
+      - orderer1.orderer.org:7174
+      - orderer2.orderer.org:7176
+      - orderer3.orderer.org:7178
+      BatchSize:
+        AbsoluteMaxBytes: 10 MB
+        MaxMessageCount: 500
+        PreferredMaxBytes: 2 MB
+      BatchTimeout: 2s
+      Capabilities:
+        V2_0: true
+      EtcdRaft:
+        Consenters:
+        - ClientTLSCert: /home/nelia/benchmark/fabric-custom-network/app/tmp/organizations/ordererOrganizations/orderer.org/orderers/orderer1.orderer.org/tls/signcerts/cert.pem
+          Host: orderer1.orderer.org
+          Port: 7174
+          ServerTLSCert: /home/nelia/benchmark/fabric-custom-network/app/tmp/organizations/ordererOrganizations/orderer.org/orderers/orderer1.orderer.org/tls/signcerts/cert.pem
+        - ClientTLSCert: /home/nelia/benchmark/fabric-custom-network/app/tmp/organizations/ordererOrganizations/orderer.org/orderers/orderer2.orderer.org/tls/signcerts/cert.pem
+          Host: orderer2.orderer.org
+          Port: 7176
+          ServerTLSCert: /home/nelia/benchmark/fabric-custom-network/app/tmp/organizations/ordererOrganizations/orderer.org/orderers/orderer2.orderer.org/tls/signcerts/cert.pem
+        - ClientTLSCert: /home/nelia/benchmark/fabric-custom-network/app/tmp/organizations/ordererOrganizations/orderer.org/orderers/orderer3.orderer.org/tls/signcerts/cert.pem
+          Host: orderer3.orderer.org
+          Port: 7178
+          ServerTLSCert: /home/nelia/benchmark/fabric-custom-network/app/tmp/organizations/ordererOrganizations/orderer.org/orderers/orderer3.orderer.org/tls/signcerts/cert.pem
+        Options:
+          ElectionTick: 10
+          HeartbeatTick: 1
+          MaxInflightBlocks: 5
+          SnapshotIntervalSize: 16 MB
+          TickInterval: 500ms
+      MaxChannels: 0
+      OrdererType: etcdraft
+      Organizations:
+      - ID: OrdererOrgMSP
+        MSPDir: /home/nelia/benchmark/fabric-custom-network/app/tmp/organizations/ordererOrganizations/orderer.org/ca/msp
+        Name: orderer.org
+        OrdererEndpoints:
+        - orderer1.orderer.org:7174
+        - orderer2.orderer.org:7176
+        - orderer3.orderer.org:7178
+        Policies:
+          Admins:
+            Rule: OR('OrdererOrgMSP.admin')
+            Type: Signature
+          Readers:
+            Rule: OR('OrdererOrgMSP.member')
+            Type: Signature
+          Writers:
+            Rule: OR('OrdererOrgMSP.member')
+            Type: Signature
+        SkipAsForeign: false
+      Policies:
+        Admins:
+          Rule: MAJORITY Admins
+          Type: ImplicitMeta
+        BlockValidation:
+          Rule: ANY Writers
+          Type: ImplicitMeta
+        Readers:
+          Rule: ANY Readers
+          Type: ImplicitMeta
+        Writers:
+          Rule: ANY Writers
+          Type: ImplicitMeta
+    Policies:
+      Admins:
+        Rule: MAJORITY Admins
+        Type: ImplicitMeta
+      Readers:
+        Rule: ANY Readers
+        Type: ImplicitMeta
+      Writers:
+        Rule: ANY Writers
+        Type: ImplicitMeta

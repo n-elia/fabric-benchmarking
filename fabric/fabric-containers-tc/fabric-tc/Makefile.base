@@ -1,0 +1,20 @@
+# import config
+# You can change the default config with `make cnf="config_special.env" build`
+cnf ?= config.env
+include $(cnf)
+export $(shell sed 's/=.*//' $(cnf))
+
+default: build
+
+.PHONY: build
+build:
+	@echo "Building $(CONTAINER)"
+	@docker build -f $(DOCKERFILE) --build-arg BASE_CONTAINER_IMAGE=$(BASE_CONTAINER) -t $(CONTAINER) .
+
+.PHONY: push
+push:
+	@echo "Pushing $(CONTAINER)"
+	@docker push $(CONTAINER)
+
+.PHONY: build-and-push
+build-and-push: build push

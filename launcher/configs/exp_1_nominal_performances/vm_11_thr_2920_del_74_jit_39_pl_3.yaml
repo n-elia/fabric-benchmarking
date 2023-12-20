@@ -1,0 +1,117 @@
+benchmark:
+  description: Caliper benchmark targeting HyperWatchdog.
+  name: bench_policy_gateway
+  test:
+    rounds:
+    - description: Populates the ledger with 100 entries.
+      label: Policy Gateway 208
+      rateControl:
+        opts:
+          tps: 4
+        type: fixed-rate
+      txNumber: 100
+      workload:
+        arguments:
+          chaincodeID: basic
+          chunkLen: 208
+          policyId: signal_energy_policy_v1
+        module: benchmarks/workloads/policy-gateway.js
+    - description: Populates the ledger with 100 entries.
+      label: Policy Gateway 417
+      rateControl:
+        opts:
+          tps: 2
+        type: fixed-rate
+      txNumber: 100
+      workload:
+        arguments:
+          chaincodeID: basic
+          chunkLen: 417
+          policyId: signal_energy_policy_v1
+        module: benchmarks/workloads/policy-gateway.js
+    - description: Populates the ledger with 100 entries.
+      label: Policy Gateway 833
+      rateControl:
+        opts:
+          tps: 1
+        type: fixed-rate
+      txNumber: 100
+      workload:
+        arguments:
+          chaincodeID: basic
+          chunkLen: 833
+          policyId: signal_energy_policy_v1
+        module: benchmarks/workloads/policy-gateway.js
+    - description: Populates the ledger with 100 entries.
+      label: Policy Gateway 1666
+      rateControl:
+        opts:
+          tps: 0.5
+        type: fixed-rate
+      txNumber: 100
+      workload:
+        arguments:
+          chaincodeID: basic
+          chunkLen: 1666
+          policyId: signal_energy_policy_v1
+        module: benchmarks/workloads/policy-gateway.js
+    - description: Populates the ledger with 100 entries.
+      label: Policy Gateway 4165
+      rateControl:
+        opts:
+          tps: 0.2
+        type: fixed-rate
+      txNumber: 100
+      workload:
+        arguments:
+          chaincodeID: basic
+          chunkLen: 4165
+          policyId: signal_energy_policy_v1
+        module: benchmarks/workloads/policy-gateway.js
+    - description: Populates the ledger with 100 entries.
+      label: Policy Gateway 8330
+      rateControl:
+        opts:
+          tps: 0.1
+        type: fixed-rate
+      txNumber: 100
+      workload:
+        arguments:
+          chaincodeID: basic
+          chunkLen: 8330
+          policyId: signal_energy_policy_v1
+        module: benchmarks/workloads/policy-gateway.js
+    - description: Populates the ledger with 100 entries.
+      label: Policy Gateway 12495
+      rateControl:
+        opts:
+          tps: 0.07
+        type: fixed-rate
+      txNumber: 100
+      workload:
+        arguments:
+          chaincodeID: basic
+          chunkLen: 12495
+          policyId: signal_energy_policy_v1
+        module: benchmarks/workloads/policy-gateway.js
+    - description: Populates the ledger with 100 entries.
+      label: Policy Gateway 16660
+      rateControl:
+        opts:
+          tps: 0.05
+        type: fixed-rate
+      txNumber: 100
+      workload:
+        arguments:
+          chaincodeID: basic
+          chunkLen: 16660
+          policyId: signal_energy_policy_v1
+        module: benchmarks/workloads/policy-gateway.js
+    workers:
+      number: 1
+launcher:
+  network:
+    delay: 74
+    jitter: 39
+    loss: 3
+    throughput: 2920
